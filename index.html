@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Системное сообщение ❤️</title>
+    <style>
+        :root {
+            --neon-pink: #ff00ff;
+            --matrix-green: #00ff00;
+        }
+
+        body {
+            background: #0a0a0a;
+            color: var(--matrix-green);
+            font-family: 'Courier New', monospace;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .container {
+            text-align: center;
+            padding: 2rem;
+            border: 3px solid var(--neon-pink);
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.9);
+            position: relative;
+            max-width: 650px;
+            animation: glitch 2s infinite;
+        }
+
+        h1 {
+            color: var(--neon-pink);
+            font-size: 2.5em;
+            text-shadow: 0 0 10px var(--neon-pink);
+            margin-bottom: 20px;
+        }
+
+        .error-code {
+            font-size: 1.2em;
+            margin: 20px 0;
+        }
+
+        #name-input {
+            background: transparent;
+            border: 2px solid var(--matrix-green);
+            color: var(--matrix-green);
+            padding: 12px 20px;
+            font-size: 1.2em;
+            margin: 20px 0;
+            text-align: center;
+            transition: 0.3s;
+            width: 80%;
+            max-width: 400px;
+            box-sizing: border-box;
+        }
+
+        #name-input:focus {
+            outline: none;
+            box-shadow: 0 0 15px var(--matrix-green);
+        }
+
+        .heart {
+            font-size: 3em;
+            cursor: pointer;
+            margin-top: 20px;
+            display: inline-block;
+            transition: 0.3s;
+        }
+
+        .heart:hover {
+            transform: scale(1.2);
+            color: var(--neon-pink);
+        }
+
+        .hidden {
+            display: none;
+            opacity: 0;
+        }
+
+        #proposal {
+            margin-top: 30px;
+            font-size: 1.5em;
+        }
+
+        .heart-label {
+            display: block;
+            color: var(--neon-pink);
+            margin-top: 10px;
+            font-size: 1.2em;
+            text-shadow: 0 0 8px var(--neon-pink);
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 20px;
+                padding: 1rem;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            #name-input {
+                width: 90%;
+                padding: 10px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚨Critical System Error🚨</h1>
+        <div class="error-code">
+            Error 404: Girlfriend not found<br>
+            <span style="font-size: 0.8em;">Severity level: <span style="color: var(--neon-pink);">Heart Emergency</span></span>
+        </div>
+
+        <input type="text" id="name-input" placeholder="Введи своё имя пользователя из тг...">
+        
+        <div id="proposal" class="hidden">
+            <p>Причина ошибки: отсутствие тебя в моей жизни</p>
+            <p>Рекомендуемое решение:</p>
+            <div style="animation: glitch 1s infinite;">
+                💖 Стать моей девушкой? 💖
+            </div>
+            <div class="heart" onclick="handleResponse(true)">❤️</div>
+            <span class="heart-label">Нажми на сердце, чтобы сказать «Да»</span>
+        </div>
+    </div>
+
+    <script>
+        const HER_NAME = '@ncs_rus_99'; // Замените на её Telegram-никнейм
+        let answered = false;
+
+        document.getElementById('name-input').addEventListener('input', function(e) {
+            const name = e.target.value.toLowerCase().trim();
+            if (name === HER_NAME.toLowerCase()) {
+                document.getElementById('proposal').classList.remove('hidden');
+                document.getElementById('proposal').style.opacity = '1';
+            }
+        });
+
+        function handleResponse(isPositive) {
+            answered = true;
+            if(isPositive) {
+                alert("Сердцебиение участилось! ❤️\nТеперь ты главный компонент моей системы!");
+                showCelebration();
+            }
+            trackResponse(isPositive);
+        }
+
+        function trackResponse(answer) {
+            localStorage.setItem('herAnswer', answer);
+        }
+
+        function showCelebration() {
+            document.body.style.background = "radial-gradient(circle, #ff00ff 0%, #0a0a0a 100%)";
+        }
+
+        window.addEventListener('beforeunload', function(e) {
+            if(!answered && document.getElementById('proposal').style.opacity === '1') {
+                trackResponse(false);
+                alert("Буду ждать как самый терпеливый алгоритм ⏳\nМой код всегда открыт для тебя!");
+            }
+        });
+    </script>
+</body>
+</html>
